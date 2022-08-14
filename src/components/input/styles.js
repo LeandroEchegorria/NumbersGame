@@ -7,7 +7,5 @@ export const styles= StyleSheet.create({
         borderBottomColor: colors.black,
         borderBottomWidth: 1,
         
-        
-
     }
 });

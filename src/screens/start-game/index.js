@@ -1,12 +1,21 @@
-import React from "react";
-import { View, Text ,  Button} from "react-native";
+import React, {useState} from "react";
+import { View, Text, Button, TouchableWithoutFeedback, Keyboard} from "react-native";
 import { Header , Card ,Input} from '../../components';
 import {styles} from './styles';
 import colors from "../../constants/colors";
 
 const StartGame = () => {
+    const [enteredValue, setEnteredValue] = useState ('');
+    
+    const onNumberChange = (text) => {
+        setEnteredValue(text.replace(/[^0-9]/g, ''));
+    }
+
     return( 
-        <View style={styles.container}>
+        <TouchableWithoutFeedback onPress={()=> {
+            Keyboard.dismiss();
+        }}>
+            <View style={styles.container}>
             <Header title= "Adivina el número" />
             <Text style= {styles.title}>Comenzar Juego</Text>
             <Card style= {styles.card}>
@@ -19,6 +28,8 @@ const StartGame = () => {
                         autoCorrect={false} 
                         keyboardType="numeric"
                         maxLength={2}
+                        onChangeText= {onNumberChange}
+                        value={enteredValue}
                     />
                                     
                 </View>
@@ -29,6 +40,8 @@ const StartGame = () => {
             </Card>
                 
         </View>
+        </TouchableWithoutFeedback>
+        
     )
 }
 export default StartGame;
