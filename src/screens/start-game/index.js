@@ -1,45 +1,71 @@
 import React, {useState} from "react";
 import { View, Text, Button, TouchableWithoutFeedback, Keyboard} from "react-native";
-import { Header , Card ,Input} from '../../components';
+import { Card ,Input, NumberContainer} from '../../components';
 import {styles} from './styles';
 import colors from "../../constants/colors";
 
-const StartGame = () => {
+const StartGame = ({ onStartGame }) => {
     const [enteredValue, setEnteredValue] = useState ('');
+    const [confirmed, setConfirmed] = useState (false);
+    const [selectedNumber, setSelectedNumber] = useState ('');
     
     const onNumberChange = (text) => {
         setEnteredValue(text.replace(/[^0-9]/g, ''));
     }
-
-    return( 
-        <TouchableWithoutFeedback onPress={()=> {
-            Keyboard.dismiss();
-        }}>
-            <View style={styles.container}>
-            <Header title= "Adivina el número" />
-            <Text style= {styles.title}>Comenzar Juego</Text>
-            <Card style= {styles.card}>
-                <View style={styles.inputContainer}>
-                    <Text style={styles.inputLabel}>Elija un numero</Text>
-                    <Input
-                        style={styles.input}
-                        blurOnSubmit  
-                        autoCapitalize="none"
-                        autoCorrect={false} 
-                        keyboardType="numeric"
-                        maxLength={2}
-                        onChangeText= {onNumberChange}
-                        value={enteredValue}
-                    />
-                                    
-                </View>
+    const onResetInput = () =>{
+         setEnteredValue('');
+         setConfirmed(false);
+    };
+    const onHandleConfirm = () => {
+        const chosenNumber = parseInt(enteredValue, 10)
+        if (isNaN(chosenNumber) || chosenNumber<= 0 || chosenNumber > 99) return;
+        setConfirmed(true);
+        setSelectedNumber(chosenNumber);
+        setEnteredValue('');
+    };
+    
+    const confirmedOutput = () => (
+            <Card style={styles.summaryContainer}>
+                <Text style={styles.summaryText}>Tu seleccionaste</Text>
+                <NumberContainer>{selectedNumber}</NumberContainer>
                 <View style={styles.buttonContainer}>
-                    <Button title="Confirmar" onPress={()=> null} color={colors.primary} />
-                    <Button title="Limpiar" onPress={()=> null} color={colors.wipeButton}/>
+                    <Button title="Empezar Juego" onPress={()=>onStartGame(selectedNumber)} color={colors.secondary}/>
                 </View>
-            </Card>
                 
-        </View>
+            </Card>
+        );
+
+    
+    return( 
+        <TouchableWithoutFeedback 
+            onPress={()=> {
+                Keyboard.dismiss();
+            }}>
+            <View style={styles.container}>
+                <Text style= {styles.title}>Comenzar Juego</Text>
+                <Card style= {styles.card}>
+                    <View style={styles.inputContainer}>
+                        <Text style={styles.inputLabel}>Elija un numero</Text>
+                        <Input
+                            style={styles.input}
+                            blurOnSubmit  
+                            autoCapitalize="none"
+                            autoCorrect={false} 
+                            keyboardType="numeric"
+                            maxLength={2}
+                            onChangeText= {onNumberChange}
+                            value={enteredValue}
+                        />
+                                        
+                    </View>
+                    <View style={styles.buttonContainer}>
+                        <Button title="Confirmar" onPress={()=> onHandleConfirm()} color={colors.primary} />
+                        <Button title="Limpiar" onPress={()=>onResetInput()} color={colors.wipeButton}/>
+                    </View>
+                </Card>
+                {confirmed && confirmedOutput()}
+                    
+            </View>
         </TouchableWithoutFeedback>
         
     )

@@ -4,18 +4,20 @@ import colors from "../../constants/colors";
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
+        marginTop: 20
 
     },
     title: {
         color: colors.wipeButton,
-        fontSize: 18,
+        fontSize: 30,
         fontWeight: 'bold',
         textAlign: 'center',
-        paddingVertical: 20,
+        padding: 20,
     },
     card: {
         marginHorizontal:20,
-        justifyContent: 'center'
+        justifyContent: 'center',
+        marginBottom: 20,
     },
     inputContainer: {
         
@@ -26,7 +28,7 @@ export const styles = StyleSheet.create({
 
     },
     inputLabel:{
-        fontSize: 15,
+        fontSize: 20,
         paddingVertical: 10,
         textAlign: 'center'
     },
@@ -34,7 +36,7 @@ export const styles = StyleSheet.create({
         width: '20%',
         maxWidth: 110,
         paddingVertical:10,
-        fontSize: 28,
+        fontSize: 30,
         textAlign: 'center'
 
     },
@@ -43,5 +45,13 @@ export const styles = StyleSheet.create({
         marginHorizontal: 20,
         flexDirection: 'row',
         justifyContent: 'space-around'
+    },
+    summaryContainer: {
+        marginHorizontal:20,
+        alignItems: "center",
+        padding: 10
+    },
+    summaryText: {
+        fontSize: 20,
     }
 })
