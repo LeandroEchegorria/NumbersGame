@@ -6,11 +6,12 @@ export const styles = StyleSheet.create({
         height: 90,
         backgroundColor: colors.primary,
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        fontFamily: 'Lato-Regular',
     },
     title: {
         color: colors.black,
         fontSize: 22,
-        fontWeight: 'bold'
+        fontFamily: 'Lato-Black',
     }
 })
