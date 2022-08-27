@@ -1,8 +1,19 @@
 import React, {useState} from "react";
-import { View, Text, Button, TouchableWithoutFeedback, Keyboard} from "react-native";
+import { 
+    View, 
+    Text, 
+    Button, 
+    TouchableWithoutFeedback, 
+    Keyboard, 
+    KeyboardAvoidingView,
+    Platform,
+    ScrollView,
+} from "react-native";
 import { Card ,Input, NumberContainer} from '../../components';
 import {styles} from './styles';
 import colors from "../../constants/colors";
+
+const isAndroid= Platform.OS == 'android';
 
 const StartGame = ({ onStartGame }) => {
     const [enteredValue, setEnteredValue] = useState ('');
@@ -37,37 +48,47 @@ const StartGame = ({ onStartGame }) => {
 
     
     return( 
-        <TouchableWithoutFeedback 
-            onPress={()=> {
-                Keyboard.dismiss();
-            }}>
-            <View style={styles.container}>
-                <Text style= {styles.title}>Comenzar Juego</Text>
-                <Card style= {styles.card}>
-                    <View style={styles.inputContainer}>
-                        <Text style={styles.inputLabel}>Elija un numero</Text>
-                        <Input
-                            style={styles.input}
-                            blurOnSubmit  
-                            autoCapitalize="none"
-                            autoCorrect={false} 
-                            keyboardType="numeric"
-                            maxLength={2}
-                            onChangeText= {onNumberChange}
-                            value={enteredValue}
-                        />
-                                        
-                    </View>
-                    <View style={styles.buttonContainer}>
-                        <Button title="Confirmar" onPress={()=> onHandleConfirm()} color={colors.primary} />
-                        <Button title="Limpiar" onPress={()=>onResetInput()} color={colors.wipeButton}/>
-                    </View>
-                </Card>
-                {confirmed && confirmedOutput()}
-                    
-            </View>
-        
-        </TouchableWithoutFeedback>
+        <KeyboardAvoidingView 
+            behavior={isAndroid ? 'padding' : 'position'} 
+            contentContainerStyle={styles.container}
+            keyboardVerticalOffset={30}
+            style= {styles.container}
+        >
+            <ScrollView>
+                <TouchableWithoutFeedback 
+                onPress={()=> {
+                    Keyboard.dismiss();
+                }}>
+                <View style={styles.container}>
+                    <Text style= {styles.title}>Comenzar Juego</Text>
+                    <Card style= {styles.card}>
+                        <View style={styles.inputContainer}>
+                            <Text style={styles.inputLabel}>Elija un numero</Text>
+                            <Input
+                                style={styles.input}
+                                blurOnSubmit  
+                                autoCapitalize="none"
+                                autoCorrect={false} 
+                                keyboardType="numeric"
+                                maxLength={2}
+                                onChangeText= {onNumberChange}
+                                value={enteredValue}
+                            />
+                                            
+                        </View>
+                        <View style={styles.buttonContainer}>
+                            <Button title="Confirmar" onPress={()=> onHandleConfirm()} color={colors.primary} />
+                            <Button title="Limpiar" onPress={()=>onResetInput()} color={colors.wipeButton}/>
+                        </View>
+                    </Card>
+                    {confirmed && confirmedOutput()}
+                        
+                </View>
+            
+                </TouchableWithoutFeedback>
+            </ScrollView>
+
+        </KeyboardAvoidingView>
         
     )
 }

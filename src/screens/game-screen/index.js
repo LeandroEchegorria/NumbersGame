@@ -24,7 +24,7 @@ const GameScreen = ({userOption , onGameOver}) => {
     const currentHigh = useRef(100);
 
     const onHandleNextGuess = (direction) => {
-        console.log(currentGuess,userOption)
+        
         if (
             (direction == 'lower' && currentGuess < userOption) ||
             (direction == 'greater' && currentGuess > userOption)
