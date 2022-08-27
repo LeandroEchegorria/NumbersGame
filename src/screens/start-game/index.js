@@ -66,6 +66,7 @@ const StartGame = ({ onStartGame }) => {
                 {confirmed && confirmedOutput()}
                     
             </View>
+        
         </TouchableWithoutFeedback>
         
     )

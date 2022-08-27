@@ -9,15 +9,17 @@ export const styles = StyleSheet.create({
     },
     title: {
         color: colors.wipeButton,
-        fontSize: 30,
+        fontSize: 22,
         fontWeight: 'bold',
         textAlign: 'center',
         padding: 20,
     },
     card: {
         marginHorizontal:20,
+        paddingVertical: 20,
         justifyContent: 'center',
         marginBottom: 20,
+
     },
     inputContainer: {
         
@@ -28,7 +30,7 @@ export const styles = StyleSheet.create({
 
     },
     inputLabel:{
-        fontSize: 20,
+        fontSize: 18,
         paddingVertical: 10,
         textAlign: 'center'
     },

@@ -1,6 +1,8 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions} from "react-native";
 import colors from "../../constants/colors";
 
+
+const {width , height} = Dimensions.get('window');
 
 export const styles = StyleSheet.create ({
     container: {
@@ -13,8 +15,8 @@ export const styles = StyleSheet.create ({
     buttonContainer: {
         flexDirection: 'row',
         justifyContent: 'space-around',
-        marginTop: 20,
-        width: '80%',
+        marginTop: height > 600 ? 15 : 10,
+        width: width*.8,
         marginHorizontal: 20,
         padding: 15,
         
@@ -22,8 +24,7 @@ export const styles = StyleSheet.create ({
     },
     card:{
         marginTop: 20,
-        marginHorizontal: 20,
-        width: '80%',
+        width: width*.8,
         alignItems: 'center',
         padding: 10,
 
